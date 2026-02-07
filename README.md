@@ -1,8 +1,11 @@
-# Security Penetration Testing Toolkit
+# Penetration Testing Toolkit
 
-This repository contains the source code and configuration for **security-penetration-testing-toolkit**, a part of the advanced engineering showcase.
+A modular toolkit for network reconnaissance and vulnerability scanning.
 
-## Features
-- Professional-grade architecture
-- Clean code principles
-- Ready for production deployment
+## Modules
+- Port Scanner
+- Service Detector
+- HTTP Header Analyzer
+
+## Usage
+`python scanner.py`
