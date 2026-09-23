@@ -1,3 +1,4 @@
+import argparse
 import socket
 from datetime import datetime
 import threading
@@ -25,7 +26,26 @@ def start_scan(target, ports):
         t.join()
     print("Scan completed")
 
+def parse_ports(spec):
+    """Parse '22,80,443' or '20-25' into a list of ints."""
+    ports = set()
+    for part in spec.split(","):
+        part = part.strip()
+        if "-" in part:
+            lo, hi = part.split("-", 1)
+            ports.update(range(int(lo), int(hi) + 1))
+        elif part:
+            ports.add(int(part))
+    return sorted(ports)
+
+
 if __name__ == "__main__":
-    target_host = "127.0.0.1"
-    target_ports = [21, 22, 80, 443, 8080]
-    start_scan(target_host, target_ports)
+    parser = argparse.ArgumentParser(
+        description="Security Penetration Testing Toolkit - multithreaded TCP port scanner."
+    )
+    parser.add_argument("--target", default="127.0.0.1",
+                        help="Target host or IP to scan (default: 127.0.0.1)")
+    parser.add_argument("--ports", default="21,22,80,443,8080",
+                        help="Ports to scan, e.g. '22,80,443' or '20-100' (default: 21,22,80,443,8080)")
+    args = parser.parse_args()
+    start_scan(args.target, parse_ports(args.ports))

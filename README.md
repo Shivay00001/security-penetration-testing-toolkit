@@ -48,3 +48,13 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 ## 📝 License
 
 This project is licensed under standard terms.
+
+## ▶️ Run
+
+```bash
+python scanner.py --target 127.0.0.1 --ports 21,22,80,443,8080
+python scanner.py --target 10.0.0.5 --ports 20-100
+python -m pytest tests/ -q   # smoke tests
+```
+
+No third-party dependencies (stdlib only). Deploy as a CLI/job container: `docker build -t pentest-toolkit . && docker run pentest-toolkit`.
